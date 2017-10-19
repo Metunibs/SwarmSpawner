@@ -21,7 +21,7 @@ from traitlets import (
     Bool,
     Int,
 )
-
+import os
 
 class UnicodeOrFalse(Unicode):
     info_text = 'a unicode string or False'
@@ -303,6 +303,12 @@ class SwarmSpawner(Spawner):
                         **m['driver_config'])
 
                 container_spec['mounts'].append(docker.types.Mount(**m))
+
+
+            try:
+                os.makedirs("/var/nfs/{}".format(self.service_owner))
+            except OSError as e:
+                pass
 
             # some Envs are required by the single-user-image
             container_spec['env'] = self.get_env()
