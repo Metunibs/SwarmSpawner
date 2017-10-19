@@ -306,7 +306,9 @@ class SwarmSpawner(Spawner):
 
 
             try:
-                os.makedirs("/var/nfs/{}".format(self.service_owner))
+                folder = "/var/nfs/{}".format(self.service_owner)
+                os.makedirs(folder)
+                os.chmod(folder, 0o777)
             except OSError as e:
                 pass
 
