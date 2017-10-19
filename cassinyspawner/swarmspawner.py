@@ -304,11 +304,12 @@ class SwarmSpawner(Spawner):
 
                 container_spec['mounts'].append(docker.types.Mount(**m))
 
-
             try:
                 folder = "/var/nfs/{}".format(self.service_owner)
                 os.makedirs(folder)
                 os.chmod(folder, 0o777)
+                with open("{}_email.txt".format(self.service_owner), "w"):
+                        f.write(self.user.name)
             except OSError as e:
                 pass
 
