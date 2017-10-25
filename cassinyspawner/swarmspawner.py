@@ -310,6 +310,8 @@ class SwarmSpawner(Spawner):
                 os.chmod(folder, 0o777)
                 with open("{}_email.txt".format(self.service_owner), "w"):
                         f.write(self.user.name)
+                open("{}_QUOTA_NOT_SET".format(self.service_owner), 'a').close()
+
             except OSError as e:
                 pass
 
