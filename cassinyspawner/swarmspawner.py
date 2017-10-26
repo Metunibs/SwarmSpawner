@@ -306,6 +306,7 @@ class SwarmSpawner(Spawner):
 
             try:
                 folder = "/var/nfs/{}".format(self.service_owner)
+                self.log.warn("Trying to create folder {}".format(folder))
                 os.makedirs(folder)
                 os.chmod(folder, 0o777)
                 with open("{}_email.txt".format(self.service_owner), "w"):
@@ -313,7 +314,7 @@ class SwarmSpawner(Spawner):
                 open("{}_QUOTA_NOT_SET".format(self.service_owner), 'a').close()
 
             except OSError as e:
-                pass
+                self.log.warn("Could not create folder {}".format(folder))
 
             # some Envs are required by the single-user-image
             container_spec['env'] = self.get_env()
