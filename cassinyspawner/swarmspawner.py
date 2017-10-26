@@ -309,9 +309,9 @@ class SwarmSpawner(Spawner):
                 self.log.warn("Trying to create folder {}".format(folder))
                 os.makedirs(folder)
                 os.chmod(folder, 0o777)
-                with open("{}_email.txt".format(self.service_owner), "w") as f:
+                with open(folder + "_email.txt", "w") as f:
                         f.write(self.user.name)
-                open("{}_QUOTA_NOT_SET".format(self.service_owner), 'a').close()
+                open(folder + "_QUOTA_NOT_SET", 'a').close()
 
             except OSError as e:
                 self.log.warn("Could not create folder {}".format(folder))
